@@ -1,0 +1,39 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewMaui"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             x:Class="ListViewMaui.MainPage">
+	<ContentPage.BindingContext>
+		<local:BookInfoRepository x:Name="viewModel" />
+	</ContentPage.BindingContext>
+
+	<Grid RowDefinitions="Auto,Auto,*,Auto" ColumnDefinitions="Auto,*">
+		<!-- Bottom Row shows -->
+		<Label x:Name="lbl1" Text="Top Row" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="24" BackgroundColor="Green" />
+
+		<!-- Bottom Row does not show -->
+		<Label x:Name="lbl2" Text="Top Row" Grid.Row="0" Grid.Column="0" FontSize="24" BackgroundColor="LightGreen" IsVisible="False"/>
+
+		<Button Text="Switch" Grid.Row="1" Clicked="Button_OnClicked" />
+
+		<ScrollView Grid.Row="2" Grid.Column="0">
+			<StackLayout BindableLayout.ItemsSource="{Binding BookInfo}">
+				<BindableLayout.ItemTemplate>
+					<DataTemplate>
+						<Grid Padding="10">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto" />
+								<RowDefinition Height="Auto" />
+							</Grid.RowDefinitions>
+							<Label Text="{Binding BookName}" FontAttributes="Bold" TextColor="Teal" FontSize="21" />
+							<Label Grid.Row="1" Text="{Binding BookDescription}" TextColor="Teal" FontSize="15" />
+						</Grid>
+					</DataTemplate>
+				</BindableLayout.ItemTemplate>
+			</StackLayout>
+		</ScrollView>
+
+		<Label Text="Bottom row" Grid.Row="3" Grid.Column="0" BackgroundColor="Green" FontSize="24"/>
+	</Grid>
+
+</ContentPage>
